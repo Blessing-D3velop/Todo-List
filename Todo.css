@@ -17,6 +17,8 @@ body {
   border-radius: 20px;
   box-shadow: 0 8px 32px rgba(0,0,0,0.3);
   color: white;
+  
+
 }
 
 h1 {
@@ -62,7 +64,7 @@ button:hover {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  animation: fadeIn 0.4s ease-in-out;
+  animation: fadeIn 1s ease-in-out;
 }
 
 .badge {
@@ -108,18 +110,81 @@ button:hover {
     transform: translateY(0);
   }
 }
+ /* Base styles (Small phones first) */
+.container {
+  padding: 14px;
+}
 
-@media (max-width: 500px) {
+h1 {
+  font-size: 17px;
+}
+
+input, select, button {
+  font-size: 12px;
+}
+
+/* Phones*/
+@media (min-width: 481px) and (max-width: 600px) {
   .container {
-    padding: 15px;
+    padding: 16px;
   }
 
   h1 {
-    font-size: 18px;
+    font-size: 20px;
   }
 
   input, select, button {
-    font-size: 13px;
+    font-size: 14px;
   }
+}
+
+/* Tablets*/
+@media (min-width: 601px) and (max-width: 768px) {
+  .container {
+    padding: 16px;
+  }
+
+  h1 {
+    font-size: 22px;
+  }
+
+  input, select, button {
+    font-size: 15px;
+  }
+}
+
+/* Smaller laptops */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .container {
+    padding: 18px;
+  }
+
+  h1 {
+    font-size: 24px;
+  }
+
+  input, select, button {
+    font-size: 16px;
+  }
+}
+
+/*Large screens  */
+@media (min-width: 1025px) {
+  .container {
+    padding: 20px;
+    max-width: 1000px;
+  }
+
+  h1 {
+    font-size: 26px;
+  }
+
+  input, select, button {
+    font-size: 16px;
+  }
+}
+
+.task-card strong{
+  word-break: break-word;
 }
 
