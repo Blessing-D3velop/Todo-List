@@ -188,3 +188,48 @@ input, select, button {
   word-break: break-word;
 }
 
+.dashboard {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 20px;
+  padding: 10px;
+  background: rgba(255,255,255,0.15);
+  border-radius: 12px;
+  backdrop-filter: blur(10px);
+  font-weight: bold;
+}
+
+.task-card div {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.task-card.completed strong {
+  text-decoration: line-through;
+  opacity: 0.6;
+}
+
+.task-card input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+}
+
+.dashboard {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 20px;
+  padding: 10px;
+  background: rgba(255,255,255,0.15);
+  border-radius: 12px;
+  backdrop-filter: blur(10px);
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.dash-item.active {
+  background: rgba(255,255,255,0.3);
+  border-radius: 8px;
+  padding: 5px 10px;
+}

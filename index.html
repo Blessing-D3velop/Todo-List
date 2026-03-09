@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>To do List Blessing-D3v</title>
-    <link rel="stylesheet" href="Todo.css">
-    </head>
-  <body>
+<head>
+  <title>To-Do List Blessing-D3v</title>
+  <link rel="stylesheet" href="Todo.css">
+</head>
+<body>
   <div class="container">
     <h1>Blessing's To-Do List</h1>
 
@@ -22,11 +22,16 @@
       <button class="js-button">+ Add</button>
     </div>
 
+    <!-- Dashboard -->
+    <div class="dashboard">
+      <div>Total Tasks: <span class="total-tasks">0</span></div>
+      <div>Completed: <span class="completed-tasks">0</span></div>
+      <div>Pending: <span class="pending-tasks">0</span></div>
+    </div>
+
     <div class="js-output task-list"></div>
-    
   </div>
 
+  <script src="todo.js"></script>
 </body>
-    <script src="todo.js"></script>
-  </body>
 </html>

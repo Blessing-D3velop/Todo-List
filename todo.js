@@ -1,38 +1,36 @@
 let arrTodo = JSON.parse(localStorage.getItem('todoList')) || [
-{ name: 'Watch Youtube', dueDate: '2026-03-24', priority: 'Low' },
-{ name: 'Wash Dishes', dueDate: '2026-03-20', priority: 'Medium' }
+  { name: 'Watch Youtube', dueDate: '2026-03-24', priority: 'Low', completed: false },
+  { name: 'Wash Dishes', dueDate: '2026-03-20', priority: 'Medium', completed: false }
 ];
+
 function renderTodoList(){
   let todoListHtml = '';
 
-  for(let i = 0; i < arrTodo.length; i++){
-
-    const todoObject = arrTodo[i];
-    const { name, dueDate, priority } = todoObject;
-
+  arrTodo.forEach((todo, i) => {
+    const { name, dueDate, priority, completed } = todo;
     let priorityClass = priority.toLowerCase();
 
-    const html = `
-      <div class="task-card">
+    todoListHtml += `
+      <div class="task-card ${completed ? 'completed' : ''}">
         <div>
-          <strong>${name}</strong><br>
-          <small>${dueDate}</small><br>
-          <span class="badge ${priorityClass}">
-            ${priority}
-          </span>
+          <input type="checkbox" ${completed ? 'checked' : ''} onclick="toggleComplete(${i})">
+          <div>
+            <strong>${name}</strong><br>
+            <small>${dueDate}</small>
+          </div>
+          <span class="badge ${priorityClass}">${priority}</span>
         </div>
 
-        <button class="delete-btn" onclick="removeTask(${i})">
-          🗑️
-        </button>
+        <button class="delete-btn" onclick="removeTask(${i})">🗑️</button>
       </div>
     `;
-    todoListHtml += html;
-  }
+  });
+
   document.querySelector('.js-output').innerHTML = todoListHtml;
+  updateDashboard();
 }
-function todoList(){
-  //Get the date, priority and task inputs
+
+function todoList() {
   const inputElement = document.querySelector('.js-input');
   const todoName = inputElement.value;
   const inputDateElement = document.querySelector('.js-date');
@@ -40,48 +38,44 @@ function todoList(){
   const inputPriorityElement = document.querySelector('.js-select-priority');
   const priority = inputPriorityElement.value;
 
-  //Validate Inputs
-  if(!todoName){
-    alert('Please Enter A Task');;
-    return;
-  }
-  if(!dueDate){
-    alert('Please Select A Due Date')
-    return;
-  }
-  if(!priority){
-    alert('Please Select Priority Level')
-    return;
-  }  
-    
-  //push the task into the array and display the array
-  arrTodo.push({
-    name: todoName,
-    dueDate: dueDate,
-    priority: priority,
-  });
-  saveToLocalStorage(); 
-  //clear the date, priority and inputText
+  if(!todoName || !dueDate || !priority) { alert("Please fill all fields"); return; }
+
+  arrTodo.push({ name: todoName, dueDate, priority, completed: false });
+  saveToLocalStorage();
   inputElement.value = '';
   inputDateElement.value = '';
   inputPriorityElement.value = '';
   renderTodoList();
 }
-//Remove Tasks
-function removeTask(index){
+
+function removeTask(index) {
   arrTodo.splice(index, 1);
+  saveToLocalStorage();
   renderTodoList();
-  saveToLocalStorage(); 
 }
 
-//save data to local storrage
-function saveToLocalStorage(){
+function toggleComplete(index) {
+  arrTodo[index].completed = !arrTodo[index].completed;
+  saveToLocalStorage();
+  renderTodoList();
+}
+
+function saveToLocalStorage() {
   localStorage.setItem('todoList', JSON.stringify(arrTodo));
 }
-document.querySelector('.js-input').addEventListener('keydown', function(event) {
-if (event.key === 'Enter') todoList();
-});
-document
-  .querySelector('.js-button')
-  .addEventListener('click', todoList)
+
+function updateDashboard() {
+  const total = arrTodo.length;
+  const completed = arrTodo.filter(todo => todo.completed).length;
+  const pending = total - completed;
+
+  document.querySelector('.total-tasks').textContent = total;
+  document.querySelector('.completed-tasks').textContent = completed;
+  document.querySelector('.pending-tasks').textContent = pending;
+}
+
+document.querySelector('.js-input').addEventListener('keydown', e => { if(e.key === 'Enter') todoList(); });
+document.querySelector('.js-button').addEventListener('click', todoList);
+
 renderTodoList();
+
