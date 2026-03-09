@@ -9,6 +9,8 @@ This project helps users organize tasks, and delete tasks in a user-friendly int
 - Delete tasks
 - Responsive design for desktop and mobile
 - Persistent task list (if using local storage in your code)
+- Mark tasks done
+- display task info of a mini dashboard
 
 ##  Technologies Used
 
